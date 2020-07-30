@@ -81,17 +81,28 @@ def get_userinfo(user_html):
 def get_tatolurl(url):
     url_pre = "https://weibo.cn"
     return url_pre+url
+
+#存储为text
+def save_text(path,str):
+    f = open(path,'a', encoding='utf-8')  #若文件不存在，系统自动创建。'a'表示可连续写入到文件，保留原内容，在原内容之后写入。
+    f.write(str)  #将爬取信息写入文件中
+    f.write("\n") 
+    f.close()   
+
 #主方法
 if __name__=='__main__':
 
     browser_sina = login_sina()
     
-    userid =  "2600942745"
+    userid =  ""#写入个人的userid
     user_url = 'http://weibo.cn/u/'+userid
     user_html = open_urlpage(browser_sina,user_url)
     
     text = get_userinfo(user_html)
     print(text)
+    
+    path = "sina_userinfo.txt"
+    save_text(path,str(text))
 
     
     
